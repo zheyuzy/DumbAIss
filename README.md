@@ -1,15 +1,12 @@
-# DumbAIss - Multi-AI Service Split View
+# DumbAIss - Multi-AI Service without API Keys
 
-A native macOS application that allows you to compare responses from multiple AI services side by side in a split-view interface.
+A native macOS application that allows you to compare responses from multiple AI services side by side in a split-view interface without API keys.
 
 ## Features
 
 - Split-view layout supporting multiple AI services simultaneously
-- Support for ChatGPT, Claude, Bard, and Perplexity
-- Multiple layout options (2-pane horizontal/vertical, 4-pane grid, 3-pane layout)
-- Centralized input system that can send prompts to multiple services
-- Resizable and collapsible panes
-- Prompt history with keyboard navigation
+- Support for ChatGPT, Claude, Bard, Deepseek and Perplexity
+- Multiple layout options (2-pane horizontal/vertical)
 - Modern SwiftUI interface with native macOS integration
 
 ## Requirements
@@ -28,17 +25,12 @@ A native macOS application that allows you to compare responses from multiple AI
 
 1. Launch the application
 2. Select your desired layout from the toolbar
-3. Toggle AI services on/off using the toolbar buttons
-4. Enter your prompt in the input bar at the bottom
-5. Use the arrow keys to navigate through prompt history
-6. Resize panes by dragging the splitter handles
+3. Choose AI services using the toolbar buttons
 
 ## Layout Options
 
 - **2 Panes Horizontal**: Side-by-side view of two AI services
 - **2 Panes Vertical**: Top/bottom view of two AI services
-- **4 Panes Grid**: 2x2 grid layout for four AI services
-- **3 Panes (1 Large + 2 Small)**: One large pane with two smaller panes
 
 ## Notes
 
@@ -50,6 +42,10 @@ A native macOS application that allows you to compare responses from multiple AI
 ## Contributing
 
 Feel free to submit issues and enhancement requests!
+
+## Future Functions
+- Centralised Input Bar
+- Floating Input bar
 
 ## License
 
