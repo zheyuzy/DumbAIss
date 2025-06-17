@@ -43,6 +43,13 @@ struct AIService: Identifiable, Hashable {
             url: URL(string: "https://chat.deepseek.com")!,
             icon: "magnifyingglass",
             isDefault: false
+        ),
+        AIService(
+            id: "grok",
+            name: "Grok",
+            url: URL(string: "https://grok.com/")!,
+            icon: "staroflife",
+            isDefault: false
         )
     ]
     
