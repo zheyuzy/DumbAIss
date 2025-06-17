@@ -5,7 +5,7 @@ A native macOS application that allows you to compare responses from multiple AI
 ## Features
 
 - Split-view layout supporting multiple AI services simultaneously
-- Support for ChatGPT, Claude, Bard, Deepseek and Perplexity
+- Support for ChatGPT, Claude, Gemini, Deepseek, Grok and Perplexity
 - Multiple layout options (2-pane horizontal/vertical)
 - Modern SwiftUI interface with native macOS integration
 
