@@ -5,19 +5,19 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // Service selector toolbar
-            HStack {
-                ForEach(AIService.allServices) { service in
-                    ServiceToggleButton(
-                        service: service,
-                        isEnabled: appState.isServiceEnabled(service.id),
-                        action: { appState.toggleService(service.id) }
-                    )
-                }
-                
+            // Compact top bar with both selectors and layout toggle
+            HStack(spacing: 12) {
+                ServiceSelector(
+                    selectedService: appState.leftPanelService,
+                    onServiceSelected: { appState.setLeftPanelService($0) },
+                    label: "Left"
+                )
+                ServiceSelector(
+                    selectedService: appState.rightPanelService,
+                    onServiceSelected: { appState.setRightPanelService($0) },
+                    label: "Right"
+                )
                 Spacer()
-                
-                // Layout toggle button
                 Button(action: { appState.toggleLayout() }) {
                     Image(systemName: appState.layout == .horizontal ? "rectangle.split.2x1" : "rectangle.split.1x2")
                         .font(.title2)
@@ -32,14 +32,24 @@ struct ContentView: View {
             // Main content area
             if appState.layout == .horizontal {
                 HStack(spacing: 0) {
-                    ForEach(appState.activeServices) { service in
+                    if let service = appState.leftService {
                         AIServicePane(service: service)
+                            .id(service.id)
+                    }
+                    if let service = appState.rightService {
+                        AIServicePane(service: service)
+                            .id(service.id)
                     }
                 }
             } else {
                 VStack(spacing: 0) {
-                    ForEach(appState.activeServices) { service in
+                    if let service = appState.leftService {
                         AIServicePane(service: service)
+                            .id(service.id)
+                    }
+                    if let service = appState.rightService {
+                        AIServicePane(service: service)
+                            .id(service.id)
                     }
                 }
             }
@@ -47,24 +57,27 @@ struct ContentView: View {
     }
 }
 
-struct ServiceToggleButton: View {
-    let service: AIService
-    let isEnabled: Bool
-    let action: () -> Void
+struct ServiceSelector: View {
+    let selectedService: String
+    let onServiceSelected: (String) -> Void
+    let label: String
     
     var body: some View {
-        Button(action: action) {
-            HStack {
-                Image(systemName: service.icon)
-                Text(service.name)
+        Picker(label, selection: Binding(
+            get: { selectedService },
+            set: { onServiceSelected($0) }
+        )) {
+            ForEach(AIService.allServices) { service in
+                HStack {
+                    Image(systemName: service.icon)
+                    Text(service.name)
+                }
+                .tag(service.id)
             }
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .background(isEnabled ? Color.accentColor.opacity(0.2) : Color.clear)
-            .cornerRadius(6)
         }
-        .buttonStyle(.plain)
-        .help(isEnabled ? "Disable \(service.name)" : "Enable \(service.name)")
+        .pickerStyle(.menu)
+        .frame(width: 140)
+        .help("Select AI for \(label) panel")
     }
 }
 
