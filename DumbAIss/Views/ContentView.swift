@@ -10,12 +10,13 @@ struct ContentView: View {
                 ServiceSelector(
                     selectedService: appState.leftPanelService,
                     onServiceSelected: { appState.setLeftPanelService($0) },
-                    label: "Left"
+                    label: appState.layout == .horizontal ? "Left" : "Top"
                 )
+                Spacer()
                 ServiceSelector(
                     selectedService: appState.rightPanelService,
                     onServiceSelected: { appState.setRightPanelService($0) },
-                    label: "Right"
+                    label: appState.layout == .horizontal ? "Right" : "Bottom"
                 )
                 Spacer()
                 Button(action: { appState.toggleLayout() }) {
@@ -76,7 +77,7 @@ struct ServiceSelector: View {
             }
         }
         .pickerStyle(.menu)
-        .frame(width: 140)
+        .frame(width: 180)
         .help("Select AI for \(label) panel")
     }
 }
