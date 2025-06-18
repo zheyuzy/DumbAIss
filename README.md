@@ -1,4 +1,4 @@
-# DumbAIss - Multi-AI Service without API Keys
+# DumbAIss - Multi-AI App without API Keys
 
 A native macOS application that allows you to compare responses from multiple AI services side by side in a split-view interface without API keys.
 
