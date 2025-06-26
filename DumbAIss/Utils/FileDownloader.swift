@@ -67,7 +67,7 @@ class FileDownloader: ObservableObject {
         }
         
         // Add progress observation
-        let observation = task.progress.observe(\.fractionCompleted) { [weak self] progress, _ in
+        _ = task.progress.observe(\.fractionCompleted) { [weak self] progress, _ in
             DispatchQueue.main.async {
                 self?.downloadProgress = progress.fractionCompleted
             }

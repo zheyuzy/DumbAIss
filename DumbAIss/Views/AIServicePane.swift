@@ -37,13 +37,13 @@ struct AIServicePane: View {
                 AIWebView(url: service.url, isLoading: $isLoading, onWebViewCreated: { webView in
                     // Update AppState with the created webView
                     if isLeftPane {
-                        //DispatchQueue.main.async { // Ensure UI updates are on main thread
+                        DispatchQueue.main.async {
                             appState.leftWebView = webView
-                        //}
+                        }
                     } else {
-                        //DispatchQueue.main.async {
+                        DispatchQueue.main.async {
                             appState.rightWebView = webView
-                        //}
+                        }
                     }
                 })
                 .overlay {

@@ -124,12 +124,12 @@ struct ContentView: View {
             }
         }
 
-        group.notify(queue: .main) { [weak self] in
+        group.notify(queue: .main) { [self] in
             // This block executes after all findTextInputElement callbacks have completed
             print("All accessibility operations attempted. Successful commits: \(successfulCommits)")
             if successfulCommits > 0 || webViewsToTarget.isEmpty {
                 // Clear text if at least one commit was successful, or if there were no targets initially
-                self?.promptText = ""
+                self.promptText = ""
             } else if successfulCommits == 0 && !webViewsToTarget.isEmpty {
                 print("Failed to commit to any webview. Prompt text not cleared.")
                 // Optionally, provide feedback to the user that sending failed.
