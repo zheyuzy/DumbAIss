@@ -1,9 +1,14 @@
 import Foundation
 import SwiftUI
+import WebKit // <--- Add this import
 
 class AppState: ObservableObject {
     @Published var leftPanelService: String = AIService.defaultServices.first?.id ?? ""
     @Published var rightPanelService: String = AIService.defaultServices.last?.id ?? ""
+
+    // Add these properties to hold the WKWebView instances
+    @Published var leftWebView: WKWebView? = nil
+    @Published var rightWebView: WKWebView? = nil
     @Published var layout: Layout = .horizontal
     
     enum Layout: String, CaseIterable {
