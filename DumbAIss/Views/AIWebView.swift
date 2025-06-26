@@ -6,17 +6,31 @@ struct AIWebView: NSViewRepresentable {
     @Binding var isLoading: Bool
     @StateObject private var downloader = FileDownloader.shared
     
+    // Callback to pass the WKWebView instance
+    var onWebViewCreated: ((WKWebView) -> Void)? // <--- Add this
+
     func makeNSView(context: Context) -> WKWebView {
         let configuration = WKWebViewConfiguration()
         configuration.preferences.isTextInteractionEnabled = true
+        // Enable developer extras for easier debugging of web content if needed
+        // For App Store submission, you might want to wrap this in a #if DEBUG
+        configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
+
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator
+
+        // Call the callback
+        onWebViewCreated?(webView) // <--- Call it here
+
         webView.load(URLRequest(url: url))
         return webView
     }
     
-    func updateNSView(_ nsView: WKWebView, context: Context) {}
+    func updateNSView(_ nsView: WKWebView, context: Context) {
+        // If the URL changes, we might need to reload or update the webView
+        // For now, assuming URL is constant after creation for a given AIWebView instance
+    }
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
